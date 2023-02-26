@@ -1,13 +1,12 @@
 from aiogram import Dispatcher, Bot, types, executor
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, InlineKeyboardMarkup, InlineKeyboardButton
+from keyboards import kb_oficial_page, kb_main_menu
 from config import TOKEN_API
 
 
 bot = Bot(TOKEN_API)
 dp = Dispatcher(bot)
 
-kb_start = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
-kb_start.add(KeyboardButton('/START'))
 
 HELP_COMMAND = '''
 <b>/start</b> - <em>Запуск бота</em>
@@ -26,18 +25,10 @@ async def start_on(_):
 # Обработчик команды /start
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    # Создаем клавиатуру
-    keyboard = InlineKeyboardMarkup()
-    
-    # Добавляем кнопки в клавиатуру
-    keyboard.add(InlineKeyboardButton("Каталог", callback_data='catalog'),
-                 InlineKeyboardButton("Наши работы", callback_data='our_works'),
-                 InlineKeyboardButton("Где купить", callback_data='where_to_buy'),
-                 InlineKeyboardButton("Компания", callback_data='company'),
-                 InlineKeyboardButton("Контакты", callback_data='contacts'))
+
     
     # Отправляем сообщение с клавиатурой
-    await bot.send_message(message.chat.id, "Выберите раздел:", reply_markup=keyboard)
+    await bot.send_message(message.chat.id, "Выберите раздел:", reply_markup=kb_oficial_page)
 
 # Обработчик кнопок
 @dp.callback_query_handler(lambda c: True)
