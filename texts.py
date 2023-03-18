@@ -1,0 +1,2 @@
+korzina = []
+print(len(korzina))
