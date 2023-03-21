@@ -6,7 +6,7 @@ kb_main_menu = ReplyKeyboardMarkup(resize_keyboard=True)
 
 btn_mm_o_nas = KeyboardButton(text='🪪 О нас')
 btn_mm_call = KeyboardButton(text='📞Позвоните мне', request_contact=True)
-btn_mm_oformiti_zakaz = KeyboardButton(text='🛒Корзина')
+btn_mm_oformiti_zakaz = InlineKeyboardButton(text='🛒Корзина', callback_data='korzina')
 
 kb_main_menu.add(btn_mm_o_nas).add(btn_mm_call).insert(btn_mm_oformiti_zakaz)
 
@@ -34,12 +34,20 @@ ikb_faq.add(btn_faq_vopros).add(btn_faq_back_to_rev_luk, btn_faq_mm)
                 # Клавиатура Корзина с покупками
 ikb_ready_to_buy = InlineKeyboardMarkup(row_width=1)
 
-btn_rtb_buy = InlineKeyboardButton(text='Оформить заказ!', callback_data='buy')
-btn_rtb_udal_iz_korz = InlineKeyboardButton(text='Убрать товар из корзины', callback_data='udal_iz_korz')
+btn_rtb_buy = InlineKeyboardButton(text='Оформить заказ!', callback_data='oformiti_zakaz')
+btn_rtb_udal_iz_korz = InlineKeyboardButton(text='Очистить корзину', callback_data='udal_iz_korz')
 btn_rtb_back = InlineKeyboardButton(text='Назад в главное меню', callback_data='mm')
 
 ikb_ready_to_buy.add(btn_rtb_buy).add(btn_rtb_udal_iz_korz).add(btn_rtb_back)
 
+
+                # Клавиатура проверки ознакомления с рекомендациями
+ikb_oformiti_zakaz = InlineKeyboardMarkup(row_width=2)
+
+btn_oz_da = InlineKeyboardButton(text='Перейти к оформлению заказа', callback_data='buy')
+btn_oz_net = InlineKeyboardButton(text='Ознакомится с рекоменациями', callback_data='recomanded_b')
+
+ikb_oformiti_zakaz.add(btn_oz_da).add(btn_oz_net)
 
 
                 # Клавиатура Ревизионный люк
@@ -137,32 +145,33 @@ ikb_vibrati_var = InlineKeyboardMarkup(row_width=3)
 btn_vv_3d_project = InlineKeyboardButton(text='3D Проект', callback_data='3d_project')
 btn_vv_chertej = InlineKeyboardButton(text='Чертёж', callback_data='chertej')
 btn_vv_gotovie_raboti = InlineKeyboardButton(text='Работы', callback_data='gotovie_raboti')
+btn_vv_harakteristiki = InlineKeyboardButton(text='Характеристики', callback_data='harakteristiki')
 btn_vv_dobaviti_v_korzinu = InlineKeyboardButton(text='Добавить в корзину', callback_data='dobaviti_v_korzinu')
 btn_vv_back = InlineKeyboardButton(text='Назад', callback_data='rev_luk')
 btn_vv_mm = InlineKeyboardButton(text='Главное меню', callback_data='mm')
 
-ikb_vibrati_var.add(btn_vv_3d_project, btn_vv_chertej, btn_vv_gotovie_raboti)
+ikb_vibrati_var.add(btn_vv_3d_project, btn_vv_chertej, btn_vv_gotovie_raboti).add(btn_vv_harakteristiki)
 ikb_vibrati_var.add(btn_vv_dobaviti_v_korzinu).add(btn_vv_back, btn_vv_mm)
 
 
-                # Клавиатура Убрать товар
-ikb_ubrati_tovar = InlineKeyboardMarkup(row_width=3)
+                # Клавиатура Чертёж
+ikb_chertej = InlineKeyboardMarkup(row_width=3)
 
-btn_ut_minus = InlineKeyboardButton(text='-1', callback_data='minus')
-btn_ut_minus = InlineKeyboardButton(text='+1', callback_data='plus')
-btn_ut_razmer = InlineKeyboardButton(text='Размер', callback_data='razmer')
-btn_ut_back = InlineKeyboardButton(text='Назад', callback_data='back_to_rtb')
-btn_ut_mm = InlineKeyboardButton(text='Главное меню', callback_data='mm')
+btn_c_dalee = InlineKeyboardButton(text='След.страница', callback_data='dalee')
+btn_c_obratno = InlineKeyboardButton(text='Пред.страница', callback_data='obratno')
+btn_c_back = InlineKeyboardButton(text='Назад', callback_data='back_to_vv')
 
+ikb_chertej.add(btn_c_obratno, btn_c_dalee).add(btn_c_back)
 
                 # Клавиатура Купить
 ikb_buy = InlineKeyboardMarkup(row_width=1)
 
-btn_b_otpraviti_zakaz = InlineKeyboardButton(text='Отправить заказ', callback_data='otpraviti_zakaz')
+btn_b_otpraviti_zakaz = InlineKeyboardButton(text='Отправить заказ!', callback_data='otpraviti_zakaz')
+btn_b_market_place = InlineKeyboardButton(text='Купить через OZON', callback_data='buy_in_ozon')
 btn_b_back = InlineKeyboardButton(text='Назад', callback_data='back_to_rtb')
 btn_b_mm = InlineKeyboardButton(text='Главное меню', callback_data='mm')
 
-ikb_buy.add(btn_b_otpraviti_zakaz).add(btn_b_back, btn_b_mm)
+ikb_buy.add(btn_b_otpraviti_zakaz).add(btn_b_market_place).add(btn_b_back, btn_b_mm)
 
 
                 # Клавиатура Рекомендации по подготовке проёма от ревизионный люк
@@ -177,7 +186,7 @@ ikb_recomanded_rl.add(btn_rrl_back, btn_rrl_mm)
                 # Клавиатура Рекомендации по подготовке проёма от купить
 ikb_recomanded_buy = InlineKeyboardMarkup(row_width=2)
 
-btn_rb_back_to_buy = InlineKeyboardButton(text='Вернуться к покупке', callback_data='rev_luk')
+btn_rb_back_to_buy = InlineKeyboardButton(text='Вернуться к покупке', callback_data='oformiti_zakaz')
 
 ikb_recomanded_buy.add(btn_rb_back_to_buy)
 

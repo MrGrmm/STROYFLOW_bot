@@ -2,7 +2,7 @@ rev_luks = {
     '200x200': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/699/1xheuc2i9d9lsdssmai7lhn2r227k2ed.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -16,8 +16,8 @@ rev_luks = {
             'Высота проема': '235 мм',
             'Возможный диапазон ширины плитки': 'от 175 мм - до 300 мм',
             'Возможный диапазон высоты плитки': ' от 175 мм - до 230 мм',
-            'Вес': '2.5',
-            'Вес люка в упаковке': '3.5',
+            'Вес(кг)': '2.5',
+            'Вес люка в упаковке(кг)': '3.5',
             'Тип': 'Настенный скрытый люк под плитку',
             'Область применения': 'Доступ к инженерным коммуникациям',
             'Схема открытия': 'Распашное открытие до 150* градусов',
@@ -31,7 +31,7 @@ rev_luks = {
     '200x300': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/773/utyx8jcmt4v4963cb490izw1ksma7zqp.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -45,8 +45,8 @@ rev_luks = {
             'Высота проема': '335 мм',
             'Возможный диапазон ширины плитки': 'от 175 мм - до 300 мм',
             'Возможный диапазон высоты плитки': ' от 275 мм - до 330 мм',
-            'Вес': '3',
-            'Вес люка в упаковке': '4',
+            'Вес(кг)': '3',
+            'Вес люка в упаковке(кг)': '4',
             'Тип': 'Настенный скрытый люк под плитку',
             'Область применения': 'Доступ к инженерным коммуникациям',
             'Схема открытия': 'Распашное открытие до 150* градусов',
@@ -60,7 +60,7 @@ rev_luks = {
     '300x300': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/b75/g1s4li05nko6jr07hm3lsybvu3nletkq.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -74,8 +74,8 @@ rev_luks = {
             'Высота проема': '335 мм',
             'Возможный диапазон ширины плитки': 'от 275 мм - до 400 мм',
             'Возможный диапазон высоты плитки': ' от 275 мм - до 330 мм',
-            'Вес': '4',
-            'Вес люка в упаковке': '5',
+            'Вес(кг)': '4',
+            'Вес люка в упаковке(кг)': '5',
             'Тип': 'Настенный скрытый люк под плитку',
             'Область применения': 'Доступ к инженерным коммуникациям',
             'Схема открытия': 'Распашное открытие до 150* градусов',
@@ -89,7 +89,7 @@ rev_luks = {
     '300x400': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/683/jt4g410bqmhu662m504lbncclhzi2cwh.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -103,8 +103,8 @@ rev_luks = {
             'Высота проема': '435 мм',
             'Возможный диапазон ширины плитки': 'от 275 мм - до 400 мм',
             'Возможный диапазон высоты плитки': ' от 375 мм - до 430 мм',
-            'Вес': '4.5',
-            'Вес люка в упаковке': '5.5',
+            'Вес(кг)': '4.5',
+            'Вес люка в упаковке(кг)': '5.5',
             'Тип': 'Настенный скрытый люк под плитку',
             'Область применения': 'Доступ к инженерным коммуникациям',
             'Схема открытия': 'Распашное открытие до 150* градусов',
@@ -118,7 +118,7 @@ rev_luks = {
     '300x500': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/d20/b924rmqs9idmzs6gw1aznwt9pb8tfvqd.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -147,7 +147,7 @@ rev_luks = {
     '300x600': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/227/udpho8vyz4wmjbb57qoz8u211qbpjtgn.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -176,7 +176,7 @@ rev_luks = {
     '400x200': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/13b/m5l60xssfskbjo1tc39b5kim8ki7v6fi.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -205,7 +205,7 @@ rev_luks = {
     '400x300': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/44d/j7wyy3bklfyi1g3mvqjgxy272u3tl92n.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -234,7 +234,7 @@ rev_luks = {
     '400x400': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/5cf/wxwymeqaksrom0656a7c1lcsrub2znxt.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -263,7 +263,7 @@ rev_luks = {
     '400x500': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/dd9/0drwpqwmrqf06sdtkew7jkayh8ij50g0.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -292,7 +292,7 @@ rev_luks = {
     '400x600': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/8b2/1k3d4t1npxg738kdiggs8mo3wqy1y86a.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -321,7 +321,7 @@ rev_luks = {
     '400x700': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/f24/plz3zti3rkm6bt4bqbw4wkb553zk5kbs.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -350,7 +350,7 @@ rev_luks = {
     '400x800': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/b4a/tosy7rv1vt3xyd50pspznl3trreg515a.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -379,7 +379,7 @@ rev_luks = {
     '400x900': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/e4d/lwu8585vgsdnymwtzhkpsvygd7j2jut7.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -408,7 +408,7 @@ rev_luks = {
     '400x1000': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/494/f949z2ctc01o46htsz63rvqhcweup9ej.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -437,7 +437,7 @@ rev_luks = {
     '400x1200': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/508/w2noyt288nhk0irgwrg5t0j4cxoo94do.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -466,7 +466,7 @@ rev_luks = {
     '500x300': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/1fc/80bh4rwg52vfgir0x7vxv7vo3k73kb9s.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -495,7 +495,7 @@ rev_luks = {
     '500x400': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/827/ma0omeq0a83i4xqb7w60j85q225y46h6.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -524,7 +524,7 @@ rev_luks = {
     '500x500': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/23b/hhxvadwlln6m3vood1v4hhi9nbkzhdjh.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -553,7 +553,7 @@ rev_luks = {
     '500x600': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/0b7/i0cwns6cfdvggozy3flx2fmrtua9ihhm.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -582,7 +582,7 @@ rev_luks = {
     '500x700': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/b78/oy2ngk8luohnw7dtd3ups3fuchnupl1h.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -611,7 +611,7 @@ rev_luks = {
     '500x800': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/22d/bbq5i26zuq8jidi950l161kxdcb4wfpq.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -640,7 +640,7 @@ rev_luks = {
     '500x900': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/437/g46h4c8bid4uuepsweawpamc0qeoth4b.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -669,7 +669,7 @@ rev_luks = {
     '500x1000': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/927/u1lyi63dog8d9ij0rqm38b8e9ivhqik9.png',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -698,7 +698,7 @@ rev_luks = {
     '500x1100': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/749/axpcwn7u77bdhwna9hs2zqtzf7mpa28t.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -727,7 +727,7 @@ rev_luks = {
     '500x1200': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/75c/n3rt5onq1zloo0lftfs005zl553tql2a.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -756,7 +756,7 @@ rev_luks = {
     '600x300': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/dae/2yoyidoxbki7d7yjo4tmub0h47b56ikh.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -785,7 +785,7 @@ rev_luks = {
     '600x400': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/ae5/v3095wp8v3xyhmxhvg8rekf63urewbeo.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -814,7 +814,7 @@ rev_luks = {
     '600x500': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/3ce/ewmkfnydfzu8dqv9jzd507p2y6o69ac1.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -843,7 +843,7 @@ rev_luks = {
     '600x600': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/d60/u9fdw3m2jhmeuwjtweu6bj9sc2mrmcij.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -872,7 +872,7 @@ rev_luks = {
     '600x700': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/8f3/r598bhhx1b38zwi6fcg26sh280y66lpw.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -901,7 +901,7 @@ rev_luks = {
     '600x800': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/0f1/z2flfr1fbo1j0mmrjqnz7tl5ej781osx.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -930,7 +930,7 @@ rev_luks = {
     '600x900': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/de1/wdzjqp2a1lem1e6i4wc4ywpjug5709n4.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -959,7 +959,7 @@ rev_luks = {
     '600x1000': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/380/99xsyh2y06z882uhgfyx42l10rf1zavo.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -988,7 +988,7 @@ rev_luks = {
     '600x1100': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/864/rin8608hsihvc32w46vuqycqio4r24a6.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
@@ -1017,7 +1017,7 @@ rev_luks = {
     '600x1200': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/54c/cxc9fszqox157wqwjt18ssx7fuqx3zed.jpg',
-            '3DПроект': 'https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1',
+            '3DПроект': 'media\\3DProject.mp4',
             'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },

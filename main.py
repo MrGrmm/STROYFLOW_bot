@@ -3,8 +3,8 @@ import random
 from aiogram.utils.exceptions import MessageToDeleteNotFound, MessageToEditNotFound
 from aiogram import Dispatcher, Bot, types, executor
 from aiogram.dispatcher.filters import Text
-from aiogram.types import ReplyKeyboardRemove, InputMedia, InputMediaAnimation
-from keyboards import kb_main_menu, ikb_faq, ikb_main_menu, ikb_ready_to_buy, ikb_rev_luke, ikb_buy, ikb_small_luke, ikb_midle_luke, ikb_big_luke, ikb_recomanded_rl, ikb_vibrati_var, ikb_recomanded_buy, ikb_san_uzel
+from aiogram.types import ReplyKeyboardRemove, InputMedia, InputMediaAnimation, InputMediaPhoto, InputMediaVideo, InlineKeyboardMarkup, InlineKeyboardButton
+from keyboards import kb_main_menu, ikb_faq, ikb_main_menu, ikb_ready_to_buy, ikb_rev_luke, ikb_buy, ikb_small_luke, ikb_midle_luke, ikb_big_luke, ikb_recomanded_rl, ikb_vibrati_var, ikb_recomanded_buy, ikb_san_uzel, ikb_oformiti_zakaz, ikb_chertej
 
 from config import TOKEN_API
 from All_products import rev_luks
@@ -31,25 +31,27 @@ HELP_COMMAND = '''
 DESCRIPTION = '''
 Информация о комании SanFlow, продуктах что продаём и производителей продуктов'''
 
-p = {
-    'name': 'Название товара',
-    'description': 'Описание товара',
-    'price': 1000000, # цена товара, указывается числом 
-}
-p1 = {
-    'name': 'Название товара',
-    'description': 'Описание товара',
-    'price': 1000000, # цена товара, указывается числом
-}
+
 korzina = []
 
 
 arr_photos_razmeri = ['https://liveam.tv/assets/images/2021/malenkie-yu.jpg',
-                    'https://porosenka.net/uploads/og/3521.png',
+                    'https://downloader.disk.yandex.ru/preview/b10f39b7c89dddb8a69ae6a016057652932a64961c2072211e7e0e62805354cb/64191b9c/xi4R7Z-38k79CmIRzcH8daxGxVPeZwJYNdVaT5NLlYJoBTOGH2zQ6F-bnigf6TTECUBl_iIKz2XIriYqPkgTtg%3D%3D?uid=0&filename=IMG_5736.HEIC&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=1898x830',
                     'https://torg-retail.ru/wp-content/uploads/2016/04/5.jpg']
 captions_photos_razmeri = ['Люки небольшого размера\n200x200 - 500x400','Люки среднего размера\n400x600 - 600x700','Люки большого размера\n400x900 - 600x1200']
 current_photo_index = 0
 
+
+photo_shema = ['https://shag-ma.ru/upload/resize_cache/iblock/fc4/1500_1500_0/bruyzuwd05sw2e6acys8t587v05ivnqy.jpg', 
+               'https://shag-ma.ru/upload/iblock/e80/34kqycldpbwzm1dgpgasoj1s44n5urj3.jpg', 
+               'https://shag-ma.ru/upload/iblock/fda/ckpn4rq9nz1y5mmdlh3sgx1hkou7iq09.jpg']
+curr_photo_shema_index = 0
+
+
+photo_recomanded = ['https://shag-ma.ru/upload/iblock/ed7/zms8qt3kmh4pczm9b5ldoj2ivusmgnif.jpg', 
+               'https://shag-ma.ru/upload/iblock/b3f/rn6fu5vqpgr3s956ni6lnxv922an5bs4.jpg', 
+               'https://shag-ma.ru/upload/resize_cache/iblock/0e8/1500_1500_0/cxnjayzxo8cq94p8q25r92inqmdaeww2.jpg']
+curr_photo_recomanded_index = 0
 
 async def start_on(_):
     print('Бот запущен!!')
@@ -94,6 +96,7 @@ async def oformiti_zakaz(message: types.Message):
     if not products:
         # Если корзина пуста, просим пользователя добавить товары
         await message.answer("Вы не добавили товары в корзину. Для начала добавьте товары.")
+        await message.delete()
     else:
         # Если в корзине есть товары, формируем сообщение с информацией о добавленных товарах
         message_text = "Вы выбрали следующие товары:\n\n"
@@ -101,7 +104,8 @@ async def oformiti_zakaz(message: types.Message):
             message_text += f"{i}. {product['Характеристики']['Имя']}\n\t Стоимость: {product['Цена']}₽/шт\n\n"
         await message.delete()  # удаление сообщения об оформлении заказа
         await message.answer_photo(photo='https://img.lovepik.com/free-png/20210918/lovepik-shopping-cart-png-image_400246975_wh1200.png', caption=message_text, reply_markup=ikb_ready_to_buy)
-    print(products)
+    
+
 
 @dp.message_handler(Text(equals='Вопрос/Ответ'))
 async def send_mess_help(message: types.Message):
@@ -124,9 +128,16 @@ async def get_private_chat(message: types.Message):
     await bot.send_message(message.from_user.id, 'Описание/ Реклама.  ФОРМАТ еще обдумывается')
 
 
+@dp.callback_query_handler(lambda c: c.data == 'oformiti_zakaz')
+async def proverka_ozn_recomand(callback: types.CallbackQuery):
+    await callback.message.edit_media(InputMedia(media='https://korolev.clinic/wp-content/uploads/2020/03/photo_2020-03-17_18-29-15.jpg',
+                                                type='photo',
+                                                caption='⚠️ВАЖНО⚠️\nПеред покупкой ревизионного люка необходимо ознакомится с рекомендациями по подготовке проёма'),
+                                        reply_markup=ikb_oformiti_zakaz)  
+    
 
 
-@dp.callback_query_handler(text='buy')
+@dp.callback_query_handler(lambda c: c.data == 'buy')
 async def buy_product(callback: types.CallbackQuery):
     await callback.message.edit_media(InputMedia(media='https://ru-static.z-dn.net/files/d28/2612fb5a49be38d39e1ada7fe046c9c6.jpg',
                                                 type='photo',
@@ -153,6 +164,9 @@ async def show_rev_luk(callback: types.CallbackQuery):
                                                 type='photo',
                                                 caption=captions_photos_razmeri[current_photo_index]),
                                         reply_markup=ikb_rev_luke)   
+    
+
+
 
 
 @dp.callback_query_handler(lambda c: c.data == 'san_uzel')
@@ -200,10 +214,10 @@ async def show_imm_faq(callback: types.CallbackQuery):
 
 @dp.callback_query_handler(lambda c: c.data == 'recomanded_rl')
 async def recomanded_text(callback: types.CallbackQuery):
-    await callback.message.edit_media(InputMedia(media='https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX18304060.jpg',
-                                                type='photo',
-                                                caption='Рекомендации по подготовке проёма'),
-                                                reply_markup=ikb_recomanded_rl)
+    global curr_photo_recomanded_index
+    await callback.message.edit_media(InputMedia(media=photo_recomanded[curr_photo_recomanded_index],
+                                                type='photo'),
+                                        reply_markup=ikb_recomanded_rl)  
     
 @dp.callback_query_handler(lambda c: c.data == 'recomanded_b')
 async def recomanded_text(callback: types.CallbackQuery):
@@ -233,21 +247,15 @@ async def vibran_razmer(callback: types.CallbackQuery):
                                                 reply_markup=ikb_big_luke)
 
 
-@dp.callback_query_handler(lambda c: c.data == 'podtverditi')
-async def obzor_vibrannogo_varianta(callback: types.CallbackQuery):
-    await callback.message.edit_media(InputMedia(media='https://shag-ma.ru/upload/iblock/494/f949z2ctc01o46htsz63rvqhcweup9ej.jpg',
-                                                 type='photo'),
-                                                 reply_markup=ikb_vibrati_var)
-
 
 @dp.callback_query_handler(lambda c: c.data == '3d_project')
 async def pokazati_3d_project(callback: types.CallbackQuery):
     global vibrannii_tovar
-    curr_gif_url = rev_luks[vibrannii_tovar]['Медиа'].get('3DПроект')
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    await callback.message.edit_media(InputMediaAnimation(media=curr_gif_url,
-                                                          caption=caption),
-                                                 reply_markup=ikb_vibrati_var)    
+    with open(rev_luks[vibrannii_tovar]['Медиа'].get('3DПроект'), 'rb') as curr_gif_url:
+        caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
+        await callback.message.edit_media(InputMediaVideo(media=curr_gif_url,
+                                                             caption=caption),
+                                            reply_markup=ikb_vibrati_var)
 
 
 @dp.callback_query_handler(lambda c: c.data == 'gotovie_raboti')
@@ -258,10 +266,33 @@ async def pokazati_3d_project(callback: types.CallbackQuery):
     await callback.message.edit_media(InputMedia(media=curr_photo_url,
                                                  type='photo',
                                                  caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
+                                        reply_markup=ikb_vibrati_var)
+    
+
+@dp.callback_query_handler(lambda c: c.data == 'harakteristiki')
+async def pokazati_3d_project(callback: types.CallbackQuery):
+    global vibrannii_tovar
+    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Чертёж')
+    caption = f"Характеристики:\n"
+    for key, value in rev_luks[vibrannii_tovar]['Характеристики'].items():
+        caption += f"▪️ \t{key}: {value}\n"
+    await callback.message.edit_media(InputMedia(media=curr_photo_url,
+                                                 type='photo',
+                                                 caption=caption),
+                                      reply_markup=ikb_vibrati_var)
     
 
 @dp.callback_query_handler(lambda c: c.data == 'chertej')
+async def show_rev_luk(callback: types.CallbackQuery):
+    global curr_photo_shema_index
+    global vibrannii_tovar
+    current_photo_index = 0
+    await callback.message.edit_media(InputMedia(media=photo_shema[current_photo_index],
+                                                type='photo'),
+                                        reply_markup=ikb_chertej)  
+
+
+@dp.callback_query_handler(lambda c: c.data == 'back_to_vv')
 async def pokazati_3d_project(callback: types.CallbackQuery):
     global vibrannii_tovar
     curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Чертёж')
@@ -269,8 +300,30 @@ async def pokazati_3d_project(callback: types.CallbackQuery):
     await callback.message.edit_media(InputMedia(media=curr_photo_url,
                                                  type='photo',
                                                  caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
+                                      reply_markup=ikb_vibrati_var)
+
     
+@dp.callback_query_handler(lambda c: c.data == 'dalee')
+async def show_next_photo(callback: types.CallbackQuery):
+    global curr_photo_shema_index
+    if curr_photo_shema_index == len(photo_shema) - 1:
+        curr_photo_shema_index = 0
+    else:
+        curr_photo_shema_index += 1
+    await callback.message.edit_media(InputMedia(media=photo_shema[curr_photo_shema_index],
+                                                type='photo'),
+                                            reply_markup=ikb_chertej)
+    
+@dp.callback_query_handler(lambda c: c.data == 'obratno')
+async def show_next_photo(callback: types.CallbackQuery):
+    global curr_photo_shema_index
+    if curr_photo_shema_index == len(photo_shema) - 1:
+        curr_photo_shema_index = 0
+    else:
+        curr_photo_shema_index -= 1
+    await callback.message.edit_media(InputMedia(media=photo_shema[curr_photo_shema_index],
+                                                type='photo'),
+                                            reply_markup=ikb_chertej)
 
 @dp.callback_query_handler(lambda c: c.data == 'dobaviti_v_korzinu')
 async def dob_v_korzinu(callback: types.CallbackQuery):
@@ -279,7 +332,22 @@ async def dob_v_korzinu(callback: types.CallbackQuery):
     await callback.answer('✅ Товар добавлен в корзину ✅')
 
 
-@dp.callback_query_handler(lambda c: c.data == '200x200')
+@dp.callback_query_handler(lambda c: c.data == 'udal_iz_korz')
+async def udaliti_iz_korzini(callback: types.CallbackQuery):
+    global korzina
+    korzina = []
+    with open('media/photo_2023-03-09_22-37-54.jpg', 'rb') as photo_logo:
+        await callback.message.edit_media(InputMedia(media=photo_logo,
+                                                     type='photo'),
+                                                     reply_markup=ikb_main_menu)
+    await callback.answer('✅Корзина очищена✅')
+
+##############################################################################################################
+@dp.callback_query_handler(lambda c: c.data in ['200x200', '200x300', '300x300', '300x400', '300x500', '300x600', '400x200', '400x300',
+                                                '400x400', '400x500', '400x600', '400x700', '400x800', '400x700', '400x800', '400x900',
+                                                '400x1000', '400x1200', '500x300', '500x400', '500x500', '500x600', '500x700', '500x800',
+                                                '500x900', '500x1000', '500x1100', '500x1200', '600x300','600x400', '600x500', '600x600',
+                                                '600x700', '600x800', '600x900', '600x1000', '600x1100', '600x1200'])
 async def rev_luks_200x200(callback: types.CallbackQuery):
     global rev_luks, vibrannii_tovar
     vibrannii_tovar = callback.data
@@ -289,413 +357,9 @@ async def rev_luks_200x200(callback: types.CallbackQuery):
                                                  type='photo',
                                                  caption=caption),
                                                  reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '200x300')
-async def rev_luks_200x300(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '300x300')
-async def rev_luks_300x300(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '300x400')
-async def rev_luks_300x400(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '300x500')
-async def rev_luks_300x500(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '300x600')
-async def rev_luks_300x600(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x200')
-async def rev_luks_400x200(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x300')
-async def rev_luks_400x300(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x400')
-async def rev_luks_400x400(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x500')
-async def rev_luks_400x500(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x600')
-async def rev_luks_400x600(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x700')
-async def rev_luks_400x700(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x800')
-async def rev_luks_400x800(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x700')
-async def rev_luks_400x700(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x800')
-async def rev_luks_400x800(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x900')
-async def rev_luks_400x900(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x1000')
-async def rev_luks_400x1000(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '400x1200')
-async def rev_luks_400x1200(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '500x300')
-async def rev_luks_500x300(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '500x400')
-async def rev_luks_500x400(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '500x500')
-async def rev_luks_500x500(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '500x600')
-async def rev_luks_500x600(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '500x700')
-async def rev_luks_500x700(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '500x800')
-async def rev_luks_500x800(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '500x900')
-async def rev_luks_500x900(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '500x1000')
-async def rev_luks_500x1000(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '500x1100')
-async def rev_luks_500x1100(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '500x1200')
-async def rev_luks_500x1200(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '600x300')
-async def rev_luks_600x300(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '600x400')
-async def rev_luks_600x400(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '600x500')
-async def rev_luks_600x500(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '600x600')
-async def rev_luks_600x600(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '600x700')
-async def rev_luks_600x700(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '600x800')
-async def rev_luks_600x800(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '600x900')
-async def rev_luks_600x900(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '600x1000')
-async def rev_luks_600x1000(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '600x1100')
-async def rev_luks_600x1100(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
-    
-@dp.callback_query_handler(lambda c: c.data == '600x1200')
-async def rev_luks_600x1200(callback: types.CallbackQuery):
-    global rev_luks, vibrannii_tovar
-    vibrannii_tovar = callback.data
-    caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
+
+
+##############################################################################################################
 
 
 executor.start_polling(dp, on_startup=start_on, skip_updates=True)
