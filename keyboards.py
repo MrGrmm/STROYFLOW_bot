@@ -53,8 +53,8 @@ ikb_oformiti_zakaz.add(btn_oz_da).add(btn_oz_net)
                 # Клавиатура Ревизионный люк
 ikb_rev_luke = InlineKeyboardMarkup(row_width=3)
 
-btn_rl_last_var = InlineKeyboardButton(text='👈🏼', callback_data='last_var')
-btn_rl_next_var = InlineKeyboardButton(text='👉🏼', callback_data='next_var')
+btn_rl_last_var = InlineKeyboardButton(text='⬅️', callback_data='last_var')
+btn_rl_next_var = InlineKeyboardButton(text='➡️', callback_data='next_var')
 btn_rl_vibrati = InlineKeyboardButton(text='Выбрать', callback_data='vibrati')
 btn_rl_back = InlineKeyboardButton(text='Назад в главное меню', callback_data='mm')
 btn_rl_recomand = InlineKeyboardButton(text='Рекомендации по подготовке проёма', callback_data='recomanded_rl')
@@ -177,18 +177,22 @@ ikb_buy.add(btn_b_otpraviti_zakaz).add(btn_b_market_place).add(btn_b_back, btn_b
                 # Клавиатура Рекомендации по подготовке проёма от ревизионный люк
 ikb_recomanded_rl = InlineKeyboardMarkup(row_width=2)
 
-btn_rrl_back = InlineKeyboardButton(text='Назад', callback_data='rev_luk')
-btn_rrl_mm = InlineKeyboardButton(text='Главное меню', callback_data='mm')
+btn_rr_next = InlineKeyboardButton(text='След.Страница', callback_data='next_rec_photo_rl')
+btn_rr_last = InlineKeyboardButton(text='Пред.Страница', callback_data='last_rec_photo_rl')
+btn_rr_back = InlineKeyboardButton(text='Назад к люкам', callback_data='rev_luk')
 
-ikb_recomanded_rl.add(btn_rrl_back, btn_rrl_mm)
+
+ikb_recomanded_rl.add(btn_rr_last, btn_rr_next).add(btn_rr_back)
 
 
                 # Клавиатура Рекомендации по подготовке проёма от купить
 ikb_recomanded_buy = InlineKeyboardMarkup(row_width=2)
 
+btn_rb_next = InlineKeyboardButton(text='След.Страница', callback_data='next_rec_photo_b')
+btn_rb_last = InlineKeyboardButton(text='Пред.Страница', callback_data='last_rec_photo_b')
 btn_rb_back_to_buy = InlineKeyboardButton(text='Вернуться к покупке', callback_data='oformiti_zakaz')
 
-ikb_recomanded_buy.add(btn_rb_back_to_buy)
+ikb_recomanded_buy.add(btn_rb_last, btn_rr_next).add(btn_rb_back_to_buy)
 
 
 
@@ -199,3 +203,10 @@ btn_su_back = InlineKeyboardButton(text='Назад в главное меню',
 
 ikb_san_uzel.add(btn_su_back)
 
+
+
+ikb_oplata = InlineKeyboardMarkup(row_width=1)
+
+btn_o_oplata = InlineKeyboardButton(text='Оплатить', callback_data='oplatiti')
+
+ikb_oplata.add(btn_o_oplata)

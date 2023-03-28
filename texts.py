@@ -1,2 +1,0 @@
-korzina = []
-print(len(korzina))

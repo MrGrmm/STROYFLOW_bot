@@ -3,8 +3,8 @@ import random
 from aiogram.utils.exceptions import MessageToDeleteNotFound, MessageToEditNotFound
 from aiogram import Dispatcher, Bot, types, executor
 from aiogram.dispatcher.filters import Text
-from aiogram.types import ReplyKeyboardRemove, InputMedia, InputMediaAnimation, InputMediaPhoto, InputMediaVideo, InlineKeyboardMarkup, InlineKeyboardButton
-from keyboards import kb_main_menu, ikb_faq, ikb_main_menu, ikb_ready_to_buy, ikb_rev_luke, ikb_buy, ikb_small_luke, ikb_midle_luke, ikb_big_luke, ikb_recomanded_rl, ikb_vibrati_var, ikb_recomanded_buy, ikb_san_uzel, ikb_oformiti_zakaz, ikb_chertej
+from aiogram.types import ReplyKeyboardRemove, InputMedia, InputMediaAnimation, InputMediaPhoto, InputMediaVideo, InlineKeyboardMarkup, InlineKeyboardButton, LabeledPrice, Message, PreCheckoutQuery
+from keyboards import kb_main_menu, ikb_faq, ikb_main_menu, ikb_ready_to_buy, ikb_rev_luke, ikb_buy, ikb_small_luke, ikb_midle_luke, ikb_big_luke, ikb_recomanded_rl, ikb_vibrati_var, ikb_recomanded_buy, ikb_san_uzel, ikb_oformiti_zakaz, ikb_chertej, ikb_oplata
 
 from config import TOKEN_API
 from All_products import rev_luks
@@ -35,9 +35,10 @@ DESCRIPTION = '''
 korzina = []
 
 
-arr_photos_razmeri = ['https://liveam.tv/assets/images/2021/malenkie-yu.jpg',
-                    'https://downloader.disk.yandex.ru/preview/b10f39b7c89dddb8a69ae6a016057652932a64961c2072211e7e0e62805354cb/64191b9c/xi4R7Z-38k79CmIRzcH8daxGxVPeZwJYNdVaT5NLlYJoBTOGH2zQ6F-bnigf6TTECUBl_iIKz2XIriYqPkgTtg%3D%3D?uid=0&filename=IMG_5736.HEIC&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=1898x830',
-                    'https://torg-retail.ru/wp-content/uploads/2016/04/5.jpg']
+arr_photos_razmeri = ['media\\Small_luke.mp4',
+                    'media\\midle_luke.mp4',
+                    'media\\big_luke.mp4']
+
 captions_photos_razmeri = ['Люки небольшого размера\n200x200 - 500x400','Люки среднего размера\n400x600 - 600x700','Люки большого размера\n400x900 - 600x1200']
 current_photo_index = 0
 
@@ -100,8 +101,14 @@ async def oformiti_zakaz(message: types.Message):
     else:
         # Если в корзине есть товары, формируем сообщение с информацией о добавленных товарах
         message_text = "Вы выбрали следующие товары:\n\n"
+        summa = 0
+        ves = 0
         for i, product in enumerate(products, start=1):
             message_text += f"{i}. {product['Характеристики']['Имя']}\n\t Стоимость: {product['Цена']}₽/шт\n\n"
+            summa += float(product['Цена'])
+            ves += float(product['Характеристики']['Вес(кг)'])
+        else:
+            message_text += f"Общая стоимость: {str(summa)} ₽\nОбщий вес: {str(ves)} кг"
         await message.delete()  # удаление сообщения об оформлении заказа
         await message.answer_photo(photo='https://img.lovepik.com/free-png/20210918/lovepik-shopping-cart-png-image_400246975_wh1200.png', caption=message_text, reply_markup=ikb_ready_to_buy)
     
@@ -114,8 +121,6 @@ async def send_mess_help(message: types.Message):
     await message.delete()
 
 
-
-    
 
 @dp.message_handler(content_types=types.ContentType.TEXT, regexp='сантехника')
 async def handle_santekhnika(message: types.Message):
@@ -132,7 +137,7 @@ async def get_private_chat(message: types.Message):
 async def proverka_ozn_recomand(callback: types.CallbackQuery):
     await callback.message.edit_media(InputMedia(media='https://korolev.clinic/wp-content/uploads/2020/03/photo_2020-03-17_18-29-15.jpg',
                                                 type='photo',
-                                                caption='⚠️ВАЖНО⚠️\nПеред покупкой ревизионного люка необходимо ознакомится с рекомендациями по подготовке проёма'),
+                                                caption='⚠️⚠️⚠️⚠️⚠️⚠️ВАЖНО⚠️⚠️⚠️⚠️⚠️⚠️\nПеред покупкой ревизионного люка необходимо ознакомится с рекомендациями по подготовке проёма'),
                                         reply_markup=ikb_oformiti_zakaz)  
     
 
@@ -160,10 +165,11 @@ async def back_to_main_menu(callback: types.CallbackQuery):
 async def show_rev_luk(callback: types.CallbackQuery):
     global current_photo_index
     current_photo_index = 0
-    await callback.message.edit_media(InputMedia(media=arr_photos_razmeri[current_photo_index],
-                                                type='photo',
-                                                caption=captions_photos_razmeri[current_photo_index]),
-                                        reply_markup=ikb_rev_luke)   
+    with open(arr_photos_razmeri[current_photo_index], 'rb') as video_razmera:
+        await callback.message.edit_media(InputMediaVideo(media=video_razmera,
+                                                    type='photo',
+                                                    caption=captions_photos_razmeri[current_photo_index]),
+                                            reply_markup=ikb_rev_luke)   
     
 
 
@@ -183,10 +189,11 @@ async def show_last_photo(callback: types.CallbackQuery):
         current_photo_index = len(arr_photos_razmeri) - 1
     else:
         current_photo_index -= 1
-    await callback.message.edit_media(InputMedia(media=arr_photos_razmeri[current_photo_index],
-                                                type='photo',
-                                                caption=captions_photos_razmeri[current_photo_index]),
-                                            reply_markup=ikb_rev_luke)
+    with open(arr_photos_razmeri[current_photo_index], 'rb') as video_razmera:
+        await callback.message.edit_media(InputMediaVideo(media=video_razmera,
+                                                    type='photo',
+                                                    caption=captions_photos_razmeri[current_photo_index]),
+                                                reply_markup=ikb_rev_luke)
     
 
 @dp.callback_query_handler(lambda c: c.data == 'next_var')
@@ -196,10 +203,11 @@ async def show_next_photo(callback: types.CallbackQuery):
         current_photo_index = 0
     else:
         current_photo_index += 1
-    await callback.message.edit_media(InputMedia(media=arr_photos_razmeri[current_photo_index],
-                                                type='photo',
-                                                caption=captions_photos_razmeri[current_photo_index]),
-                                            reply_markup=ikb_rev_luke)
+    with open(arr_photos_razmeri[current_photo_index], 'rb') as video_razmera:
+        await callback.message.edit_media(InputMediaVideo(media=video_razmera,
+                                                    type='photo',
+                                                    caption=captions_photos_razmeri[current_photo_index]),
+                                                reply_markup=ikb_rev_luke)
 
 
 
@@ -215,36 +223,89 @@ async def show_imm_faq(callback: types.CallbackQuery):
 @dp.callback_query_handler(lambda c: c.data == 'recomanded_rl')
 async def recomanded_text(callback: types.CallbackQuery):
     global curr_photo_recomanded_index
+    curr_photo_recomanded_index = 0
     await callback.message.edit_media(InputMedia(media=photo_recomanded[curr_photo_recomanded_index],
                                                 type='photo'),
                                         reply_markup=ikb_recomanded_rl)  
     
+@dp.callback_query_handler(lambda c: c.data == 'last_rec_photo_rl')
+async def show_last_photo(callback: types.CallbackQuery):
+    global curr_photo_recomanded_index
+    if curr_photo_recomanded_index == 0:
+        curr_photo_recomanded_index = len(photo_recomanded) - 1
+    else:
+        curr_photo_recomanded_index -= 1
+    await callback.message.edit_media(InputMedia(media=photo_recomanded[curr_photo_recomanded_index],
+                                                type='photo'),
+                                            reply_markup=ikb_recomanded_rl)
+    
+
+@dp.callback_query_handler(lambda c: c.data == 'next_rec_photo_rl')
+async def show_next_photo(callback: types.CallbackQuery):
+    global curr_photo_recomanded_index
+    if curr_photo_recomanded_index == len(photo_recomanded) - 1:
+        curr_photo_recomanded_index = 0
+    else:
+        curr_photo_recomanded_index += 1
+    await callback.message.edit_media(InputMedia(media=photo_recomanded[curr_photo_recomanded_index],
+                                                type='photo'),
+                                            reply_markup=ikb_recomanded_rl)
+
 @dp.callback_query_handler(lambda c: c.data == 'recomanded_b')
 async def recomanded_text(callback: types.CallbackQuery):
-    await callback.message.edit_media(InputMedia(media='https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX18304060.jpg',
-                                                type='photo',
-                                                caption='Рекомендации по подготовке проёма'),
-                                                reply_markup=ikb_recomanded_buy)
+    global curr_photo_recomanded_index
+    curr_photo_recomanded_index = 0
+    await callback.message.edit_media(InputMedia(media=photo_recomanded[curr_photo_recomanded_index],
+                                                type='photo'),
+                                        reply_markup=ikb_recomanded_buy)  
+    
+@dp.callback_query_handler(lambda c: c.data == 'last_rec_photo_b')
+async def show_last_photo(callback: types.CallbackQuery):
+    global curr_photo_recomanded_index
+    if curr_photo_recomanded_index == 0:
+        curr_photo_recomanded_index = len(photo_recomanded) - 1
+    else:
+        curr_photo_recomanded_index -= 1
+    await callback.message.edit_media(InputMedia(media=photo_recomanded[curr_photo_recomanded_index],
+                                                type='photo'),
+                                            reply_markup=ikb_recomanded_buy)
+    
+
+@dp.callback_query_handler(lambda c: c.data == 'next_rec_photo_b')
+async def show_next_photo(callback: types.CallbackQuery):
+    global curr_photo_recomanded_index
+    if curr_photo_recomanded_index == len(photo_recomanded) - 1:
+        curr_photo_recomanded_index = 0
+    else:
+        curr_photo_recomanded_index += 1
+    await callback.message.edit_media(InputMedia(media=photo_recomanded[curr_photo_recomanded_index],
+                                                type='photo'),
+                                            reply_markup=ikb_recomanded_buy)
+
 
 
 @dp.callback_query_handler(lambda c: c.data == 'vibrati')
 async def vibran_razmer(callback: types.CallbackQuery):
     global current_photo_index
+    global arr_photos_razmeri
     if current_photo_index == 0:
-        await callback.message.edit_media(InputMedia(media='https://liveam.tv/assets/images/2021/malenkie-yu.jpg',
-                                                type='photo',
-                                                caption='Выберите точный размер необходимого люка'),
-                                                reply_markup=ikb_small_luke)
+        with open(arr_photos_razmeri[current_photo_index], 'rb') as video_razmera:
+            await callback.message.edit_media(InputMediaVideo(media=video_razmera,
+                                                    type='photo',
+                                                    caption='Выберите точный размер необходимого люка'),
+                                                    reply_markup=ikb_small_luke)
     elif current_photo_index == 1:
-        await callback.message.edit_media(InputMedia(media='https://porosenka.net/uploads/og/3521.png',
-                                                type='photo',
-                                                caption='Выберите точный размер необходимого люка'),
-                                                reply_markup=ikb_midle_luke)
+        with open(arr_photos_razmeri[current_photo_index], 'rb') as video_razmera:
+            await callback.message.edit_media(InputMediaVideo(media=video_razmera,
+                                                    type='photo',
+                                                    caption='Выберите точный размер необходимого люка'),
+                                                    reply_markup=ikb_midle_luke)
     elif current_photo_index == 2:
-        await callback.message.edit_media(InputMedia(media='https://torg-retail.ru/wp-content/uploads/2016/04/5.jpg',
-                                                type='photo',
-                                                caption='Выберите точный размер необходимого люка'),
-                                                reply_markup=ikb_big_luke)
+        with open(arr_photos_razmeri[current_photo_index], 'rb') as video_razmera:
+            await callback.message.edit_media(InputMediaVideo(media=video_razmera,
+                                                    type='photo',
+                                                    caption='Выберите точный размер необходимого люка'),
+                                                    reply_markup=ikb_big_luke)
 
 
 
@@ -286,10 +347,11 @@ async def pokazati_3d_project(callback: types.CallbackQuery):
 async def show_rev_luk(callback: types.CallbackQuery):
     global curr_photo_shema_index
     global vibrannii_tovar
-    current_photo_index = 0
-    await callback.message.edit_media(InputMedia(media=photo_shema[current_photo_index],
+    curr_photo_shema_index = 0
+    await callback.message.edit_media(InputMedia(media=photo_shema[curr_photo_shema_index],
                                                 type='photo'),
-                                        reply_markup=ikb_chertej)  
+                                        reply_markup=ikb_chertej)
+
 
 
 @dp.callback_query_handler(lambda c: c.data == 'back_to_vv')
@@ -359,7 +421,57 @@ async def rev_luks_200x200(callback: types.CallbackQuery):
                                                  reply_markup=ikb_vibrati_var)
 
 
+
+
+
+
 ##############################################################################################################
+
+
+
+
+
+# @dp.callback_query_handler(lambda c: c.data == 'otpraviti_zakaz')
+# async def order(callback_query: types.CallbackQuery):
+#     bot = dp.bot
+#     message = callback_query.message
+#     await bot.send_invoice(chat_id=message.chat.id,
+#                            title='Покупка через телеграм бот',
+#                            description='Пробуем оплату',
+#                            payload='Инфа для статистики',
+#                            provider_token='381764678:TEST:53130',
+#                            currency='rub',
+#                            prices=LabeledPrice(label='Доступ к секретной информации',
+#                                                amount=15000),
+#                             start_parameter='parametr_start',
+#                             provider_data=None,
+#                             photo_url='https://htstatic.imgsmail.ru/pic_image/b35d56a4ee75c0ffd021c7b0f8088a8a/840/359/1911653/',
+#                             photo_size=100,
+#                             photo_width=800,
+#                             photo_height=450,
+#                             need_name=True,
+#                             need_phone_number=True,
+#                             need_email=True,
+#                             need_shipping_address=True,
+#                             send_phone_number_to_provider=False,
+#                             send_email_to_provider=False,
+#                             is_flexible=False,
+#                             disable_notification=False,
+#                             protect_content=False,
+#                             reply_to_message_id=None,
+#                             allow_sending_without_reply=True,
+#                             reply_markup=ikb_oplata,
+#                             request_timeout=15)
+
+
+# @dp.pre_checkout_query_handler(lambda c: c.data == 'oplatiti')
+# async def pre_checkout_query(pre_checkout_query: PreCheckoutQuery, bot: Bot):
+#     await bot.answer_pre_checkout_query(pre_checkout_query_id=pre_checkout_query, ok=True)
+
+
+# async def successful_payment(message: Message):
+#     msg = f'Спасибо за оплату {message.successful_payment.total_amount // 100} {message.successful_payment.currency}.'
+#     await message.answer(msg)
 
 
 executor.start_polling(dp, on_startup=start_on, skip_updates=True)

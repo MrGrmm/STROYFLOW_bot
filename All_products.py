@@ -1,9 +1,13 @@
+
+
 rev_luks = {
     '200x200': {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/699/1xheuc2i9d9lsdssmai7lhn2r227k2ed.jpg',
             '3DПроект': 'media\\3DProject.mp4',
-            'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
+            'Чертёж': ['media\\200x200\\chertej_1.jpg',
+                        'media\\200x200\\chertej_2.jpg',
+                        'media\\200x200\\chertej_3.jpg'],
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
         'Характеристики': {
@@ -32,7 +36,9 @@ rev_luks = {
         'Медиа' : {
             'Фото': 'https://shag-ma.ru/upload/iblock/773/utyx8jcmt4v4963cb490izw1ksma7zqp.jpg',
             '3DПроект': 'media\\3DProject.mp4',
-            'Чертёж': 'https://www.asutpp.ru/wp-content/uploads/2020/01/principialnaya-shema.jpg',
+            'Чертёж': ['media\\200x300\\chertej_1.jpg',
+                       'media\\200x300\\chertej_2.jpg',
+                       'media\\200x300\\chertej_3.jpg'],
             'Готовое': 'https://psm.co.ua/wp-content/uploads/2021/11/%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BE.jpg'
         },
         'Характеристики': {
@@ -1044,3 +1050,5 @@ rev_luks = {
         'Цена' : '20500'
     }                                                                        
 }
+
+
