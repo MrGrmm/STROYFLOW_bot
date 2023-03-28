@@ -343,21 +343,31 @@ async def pokazati_3d_project(callback: types.CallbackQuery):
                                       reply_markup=ikb_vibrati_var)
     
 
+# @dp.callback_query_handler(lambda c: c.data == 'chertej')
+# async def show_rev_luk(callback: types.CallbackQuery):
+#     global curr_photo_shema_index
+#     global vibrannii_tovar
+#     curr_photo_shema_index = 0
+#     await callback.message.edit_media(InputMedia(media=photo_shema[curr_photo_shema_index],
+#                                                 type='photo'),
+#                                         reply_markup=ikb_chertej)
+    
 @dp.callback_query_handler(lambda c: c.data == 'chertej')
 async def show_rev_luk(callback: types.CallbackQuery):
     global curr_photo_shema_index
     global vibrannii_tovar
     curr_photo_shema_index = 0
-    await callback.message.edit_media(InputMedia(media=photo_shema[curr_photo_shema_index],
-                                                type='photo'),
-                                        reply_markup=ikb_chertej)
+    with open(rev_luks[vibrannii_tovar]['Медиа']['Чертёж'][curr_photo_shema_index], 'rb') as media:
+        await callback.message.edit_media(InputMedia(media=media,
+                                                    type='photo'),
+                                            reply_markup=ikb_chertej)
 
 
 
 @dp.callback_query_handler(lambda c: c.data == 'back_to_vv')
 async def pokazati_3d_project(callback: types.CallbackQuery):
     global vibrannii_tovar
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Чертёж')
+    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа']['Фото']
     caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
     await callback.message.edit_media(InputMedia(media=curr_photo_url,
                                                  type='photo',
@@ -372,9 +382,10 @@ async def show_next_photo(callback: types.CallbackQuery):
         curr_photo_shema_index = 0
     else:
         curr_photo_shema_index += 1
-    await callback.message.edit_media(InputMedia(media=photo_shema[curr_photo_shema_index],
-                                                type='photo'),
-                                            reply_markup=ikb_chertej)
+    with open(rev_luks[vibrannii_tovar]['Медиа']['Чертёж'][curr_photo_shema_index], 'rb') as media:
+        await callback.message.edit_media(InputMedia(media=media,
+                                                    type='photo'),
+                                                reply_markup=ikb_chertej)
     
 @dp.callback_query_handler(lambda c: c.data == 'obratno')
 async def show_next_photo(callback: types.CallbackQuery):
@@ -383,7 +394,8 @@ async def show_next_photo(callback: types.CallbackQuery):
         curr_photo_shema_index = 0
     else:
         curr_photo_shema_index -= 1
-    await callback.message.edit_media(InputMedia(media=photo_shema[curr_photo_shema_index],
+    with open(rev_luks[vibrannii_tovar]['Медиа']['Чертёж'][curr_photo_shema_index], 'rb') as media:
+        await callback.message.edit_media(InputMedia(media=media,
                                                 type='photo'),
                                             reply_markup=ikb_chertej)
 
@@ -414,11 +426,12 @@ async def rev_luks_200x200(callback: types.CallbackQuery):
     global rev_luks, vibrannii_tovar
     vibrannii_tovar = callback.data
     caption = f"{rev_luks[vibrannii_tovar]['Характеристики']['Имя']}\n\t{rev_luks[vibrannii_tovar]['Цена']}₽/шт"
-    curr_photo_url = rev_luks[vibrannii_tovar]['Медиа'].get('Фото')
-    await callback.message.edit_media(InputMedia(media=curr_photo_url,
-                                                 type='photo',
-                                                 caption=caption),
-                                                 reply_markup=ikb_vibrati_var)
+    with open(rev_luks[vibrannii_tovar]['Медиа']['Фото'], 'rb') as curr_photo_url:
+    # curr_photo_url = rev_luks[vibrannii_tovar]['Медиа']['Фото']
+        await callback.message.edit_media(InputMediaVideo(media=curr_photo_url,
+                                                    type='photo',
+                                                    caption=caption),
+                                                    reply_markup=ikb_vibrati_var)
 
 
 
